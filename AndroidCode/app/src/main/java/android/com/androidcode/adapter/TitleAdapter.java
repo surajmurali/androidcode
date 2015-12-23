@@ -2,6 +2,10 @@ package android.com.androidcode.adapter;
 
 import android.com.androidcode.R;
 import android.content.Context;
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +39,8 @@ public class TitleAdapter extends BaseAdapter {
 
     @Override
     public Title getItem(int position) {
-
         return titles.get(position);
     }
-
     @Override
     public long getItemId(int position) {
         return position;
@@ -61,12 +63,17 @@ public class TitleAdapter extends BaseAdapter {
         }
         String toUpper=title.getTitle().substring(0,1).toUpperCase()+title.getTitle().substring(1);
         holder.title.setText(toUpper);
-        holder.description.setText(title.getDescription());
+        holder.description.setText(getDecoratedDescription(title.getDescription()));
         return vi;
     }
     public static class TitleViewHolder {
-
         public TextView title,description;
-
+    }
+    public SpannableString getDecoratedDescription(String description){
+        description=description.substring(0,1).toUpperCase()+description.substring(1);
+        SpannableString spannableString=new SpannableString(description);
+        spannableString.setSpan(new RelativeSizeSpan(1.5f), 0, 1, 0);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), 0,1, 0);
+        return spannableString;
     }
 }
