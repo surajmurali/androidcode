@@ -18,6 +18,7 @@
             android:layout_below="@id/detailTitle"
             android:layout_marginTop="10dp"
             android:textSize="14sp"
+            android:textColor="#898989"
             android:id="@+id/detailDescription"
             />
 </RelativeLayout>

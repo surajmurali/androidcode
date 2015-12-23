@@ -4,5 +4,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Refresh</string>
     <string name="title_activity_main">Titles</string>
-    <string name="title_activity_title_details">TitleDetailsActivity</string>
+    <string name="title_activity_title_details">Title Details</string>
 </resources>

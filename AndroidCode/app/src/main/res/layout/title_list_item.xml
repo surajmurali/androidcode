@@ -28,6 +28,7 @@
             android:maxLines="4"
             android:layout_width="match_parent"
             android:textSize="14sp"
+            android:textColor="#898989"
             android:layout_height="match_parent" />
         >
         </RelativeLayout>
