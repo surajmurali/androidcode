@@ -10,7 +10,6 @@
         android:layout_height="100dp"
         android:adjustViewBounds="true"
         android:scaleType="fitStart"
-
         android:layout_alignParentLeft="true"
         android:id="@+id/imageView"/>
     <TextView
