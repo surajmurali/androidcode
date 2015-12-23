@@ -1,12 +1,14 @@
 package android.com.androidcode.activities;
 import android.com.androidcode.R;
 import android.com.androidcode.Util.IntentHelper;
+import android.com.androidcode.Util.urlimageviewhelper.UrlImageViewHelper;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import jsonmodels.Title;
@@ -23,6 +25,8 @@ private Title title;
         String toUpper=title.getTitle().substring(0,1).toUpperCase()+title.getTitle().substring(1);
         ((TextView)findViewById(R.id.detailTitle)).setText(toUpper);
         ((TextView)findViewById(R.id.detailDescription)).setText(getDecoratedDescription(title.getDescription()));
+        ImageView imageView=(ImageView)findViewById(R.id.imageView);
+        UrlImageViewHelper.setUrlDrawable(imageView, title.getImage());
     }
 
     public SpannableString getDecoratedDescription(String description){

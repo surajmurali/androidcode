@@ -1,6 +1,4 @@
 package jsonmodels;
-import android.com.androidcode.database.DatabaseHelper;
-import android.os.AsyncTask;
 /**
  * Created by jiffler on 23/12/15.
  */

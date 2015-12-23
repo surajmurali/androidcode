@@ -1,6 +1,7 @@
 package android.com.androidcode.adapter;
 
 import android.com.androidcode.R;
+import android.com.androidcode.Util.urlimageviewhelper.UrlImageViewHelper;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableString;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import jsonmodels.Title;
@@ -54,6 +56,7 @@ public class TitleAdapter extends BaseAdapter {
             holder = new TitleViewHolder();
             holder.title=(TextView)vi.findViewById(R.id.title);
             holder.description=(TextView)vi.findViewById(R.id.description);
+
             vi.setTag(holder);
         } else {
             holder = (TitleViewHolder) vi.getTag();
@@ -61,10 +64,12 @@ public class TitleAdapter extends BaseAdapter {
         String toUpper=title.getTitle().substring(0,1).toUpperCase()+title.getTitle().substring(1);
         holder.title.setText(toUpper);
         holder.description.setText(getDecoratedDescription(title.getDescription()));
+
         return vi;
     }
     public static class TitleViewHolder {
         public TextView title,description;
+
     }
     public SpannableString getDecoratedDescription(String description){
         description=description.substring(0,1).toUpperCase()+description.substring(1);
