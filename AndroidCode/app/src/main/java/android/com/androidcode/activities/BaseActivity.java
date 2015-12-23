@@ -3,6 +3,7 @@ package android.com.androidcode.activities;
 import android.app.ProgressDialog;
 import android.com.androidcode.R;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -24,6 +25,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mContext=this;
         initOKHttpClient();
         initRetrofit();
