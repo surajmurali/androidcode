@@ -1,10 +1,14 @@
 package android.com.androidcode.activities;
 
 import android.com.androidcode.R;
+import android.com.androidcode.Util.IntentHelper;
 import android.com.androidcode.adapter.TitleAdapter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -50,19 +54,23 @@ public class MainActivity extends BaseActivity {
                 progressDialog.dismiss();
             }
         });
-
-
     }
-
     public void initializeTitlesListWithData(){
         titleAdapter=new TitleAdapter(mContext,titles);
         titlesListView.setAdapter(titleAdapter);
+        titlesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                IntentHelper.addObjectForKey(titles.get(position),"title");
+                Intent intent = new Intent(mContext, TitleDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void initUi(){
         titlesListView=(ListView)findViewById(R.id.tittleListView);
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
