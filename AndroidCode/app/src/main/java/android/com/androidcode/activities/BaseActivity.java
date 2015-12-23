@@ -25,7 +25,6 @@ public class BaseActivity extends AppCompatActivity {
         mContext=this;
         initOKHttpClient();
         initRetrofit();
-
     }
 
     public void initOKHttpClient(){

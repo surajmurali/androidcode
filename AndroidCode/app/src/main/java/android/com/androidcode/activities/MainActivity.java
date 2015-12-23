@@ -1,6 +1,7 @@
 package android.com.androidcode.activities;
 
 import android.com.androidcode.R;
+import android.com.androidcode.adapter.TitleAdapter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import retrofit.Retrofit;
 public class MainActivity extends BaseActivity {
     private ArrayList<Title>titles;
     private ListView titlesListView;
+    private TitleAdapter titleAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,9 @@ public class MainActivity extends BaseActivity {
                     titles = response.body();
                     initializeTitlesListWithData();
                 }
+                else{
+                    System.out.println("failed Response");
+                }
             }
 
             @Override
@@ -47,12 +52,13 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
     public void initializeTitlesListWithData(){
-
+        titleAdapter=new TitleAdapter(mContext,titles);
+        titlesListView.setAdapter(titleAdapter);
     }
     public void initUi(){
         titlesListView=(ListView)findViewById(R.id.tittleListView);
+
     }
 
     @Override
