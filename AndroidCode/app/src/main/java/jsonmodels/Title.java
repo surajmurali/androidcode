@@ -1,9 +1,11 @@
 package jsonmodels;
-
+import android.com.androidcode.database.DatabaseHelper;
+import android.os.AsyncTask;
 /**
  * Created by jiffler on 23/12/15.
  */
 public class Title {
+    private String databaseId="title";
     String title;
     String description;
     String image;
@@ -11,7 +13,6 @@ public class Title {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -24,11 +25,15 @@ public class Title {
         this.description = description;
     }
 
-    public String getImage() {
+    public String getImage()
+    {
         return image;
     }
 
     public void setImage(String image) {
+
         this.image = image;
     }
+
+
 }

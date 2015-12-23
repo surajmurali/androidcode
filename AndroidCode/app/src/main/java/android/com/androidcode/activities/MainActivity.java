@@ -3,7 +3,9 @@ package android.com.androidcode.activities;
 import android.com.androidcode.R;
 import android.com.androidcode.Util.IntentHelper;
 import android.com.androidcode.adapter.TitleAdapter;
+import android.com.androidcode.database.DatabaseHelper;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +13,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 
+import jsonmodels.JSONDataStore;
 import jsonmodels.Title;
 import networkservice.FetchTitleService;
 import retrofit.Call;
@@ -24,6 +30,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Title>titles;
     private ListView titlesListView;
     private TitleAdapter titleAdapter;
+    private final String titleContentId="title";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +49,8 @@ public class MainActivity extends BaseActivity {
                 if (response.isSuccess()) {
                     titles = response.body();
                     initializeTitlesListWithData();
-                }
-                else{
+                    saveTitleContent();
+                } else {
                     System.out.println("failed Response");
                 }
                 progressDialog.dismiss();
@@ -52,6 +59,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onFailure(Throwable t) {
                 progressDialog.dismiss();
+
+                loadOffline();
             }
         });
     }
@@ -61,7 +70,7 @@ public class MainActivity extends BaseActivity {
         titlesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                IntentHelper.addObjectForKey(titles.get(position),"title");
+                IntentHelper.addObjectForKey(titles.get(position), "title");
                 Intent intent = new Intent(mContext, TitleDetailsActivity.class);
                 startActivity(intent);
             }
@@ -87,9 +96,57 @@ public class MainActivity extends BaseActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            fetchTitlesFromServer();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+    public void saveTitleContent(){
+        save(new java.util.Date().getTime(),new Gson().toJson(titles),titleContentId);
+    }
+    public void loadOffline(){
+            new AsyncTask<String, Void, String>() {
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
+                @Override
+                protected String doInBackground( String... params ) {
+                    DatabaseHelper databaseHelper = new DatabaseHelper();
+                    if (databaseHelper.containsKey(titleContentId)){
+                        JSONDataStore dataStore = databaseHelper
+                                .getJsonData(titleContentId);
+                        return dataStore.getJsonData();
+                    }
+                    else
+                        return null;
+                }
+                protected void onPostExecute(String response) {
+                    if (response != null) {
+                        Gson gson=new Gson();
+                        titles=gson.fromJson(response,new TypeToken<ArrayList<Title>>(){}.getType());
+                        initializeTitlesListWithData();
+                    }
+                }
+            }.execute();
+        }
+
+
+    public void save(final long timeStamp,final String  jsonData,final String databaseId){
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground( Void... voids ) {
+                JSONDataStore dataStore=new JSONDataStore(databaseId,String.valueOf(timeStamp),jsonData);
+                DatabaseHelper databaseHelper = new DatabaseHelper();
+                if (databaseHelper.containsKey(databaseId))
+                    databaseHelper.updateJsonData(dataStore);
+                else
+                    databaseHelper.addJsonData(dataStore);
+                return null;
+            }
+        }.execute();
+
+    }
+
 }
