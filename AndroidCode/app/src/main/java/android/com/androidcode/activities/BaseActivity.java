@@ -1,5 +1,6 @@
 package android.com.androidcode.activities;
 
+import android.app.ProgressDialog;
 import android.com.androidcode.R;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class BaseActivity extends AppCompatActivity {
     protected OkHttpClient okHttpClient;
     protected Context mContext;
     protected Retrofit retrofit;
+    protected ProgressDialog progressDialog;
     protected String baseUrl="https://gist.githubusercontent.com/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,13 @@ public class BaseActivity extends AppCompatActivity {
         mContext=this;
         initOKHttpClient();
         initRetrofit();
+        initProgressDialog();
     }
-
+    public void initProgressDialog(){
+        progressDialog= new ProgressDialog(mContext);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+    }
     public void initOKHttpClient(){
         okHttpClient= new OkHttpClient();
         okHttpClient.setReadTimeout(20000, TimeUnit.MILLISECONDS);

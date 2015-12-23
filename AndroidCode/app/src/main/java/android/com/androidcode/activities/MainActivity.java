@@ -30,6 +30,8 @@ public class MainActivity extends BaseActivity {
     public void fetchTitlesFromServer(){
         final FetchTitleService fetchTitleService=retrofit.create(FetchTitleService.class);
         Call<ArrayList<Title>> call =fetchTitleService.listTitles();
+        progressDialog.setMessage("Loading titles");
+        progressDialog.show();
         call.enqueue(new Callback<ArrayList<Title>>() {
             @Override
             public void onResponse(Response<ArrayList<Title>> response, Retrofit retrofit) {
@@ -40,12 +42,12 @@ public class MainActivity extends BaseActivity {
                 else{
                     System.out.println("failed Response");
                 }
+                progressDialog.dismiss();
             }
 
             @Override
             public void onFailure(Throwable t) {
-
-
+                progressDialog.dismiss();
             }
         });
 
