@@ -18,9 +18,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-import jsonmodels.JSONDataStore;
-import jsonmodels.Title;
-import networkservice.FetchTitleService;
+import android.com.androidcode.jsonmodels.JSONDataStore;
+import android.com.androidcode.jsonmodels.Title;
+import android.com.androidcode.networkservice.FetchTitleService;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;

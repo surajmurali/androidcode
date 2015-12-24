@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import jsonmodels.JSONDataStore;
+import android.com.androidcode.jsonmodels.JSONDataStore;
 
 /**
  * Created by jiffler on 23/12/15.

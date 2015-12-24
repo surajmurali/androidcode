@@ -1,7 +1,6 @@
 package android.com.androidcode.adapter;
 
 import android.com.androidcode.R;
-import android.com.androidcode.Util.urlimageviewhelper.UrlImageViewHelper;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableString;
@@ -11,10 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
-import jsonmodels.Title;
+import android.com.androidcode.jsonmodels.Title;
 
 /**
  * Created by jiffler on 23/12/15.

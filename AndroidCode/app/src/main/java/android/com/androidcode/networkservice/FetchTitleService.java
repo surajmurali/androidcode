@@ -1,8 +1,8 @@
-package networkservice;
+package android.com.androidcode.networkservice;
 
 import java.util.ArrayList;
 
-import jsonmodels.Title;
+import android.com.androidcode.jsonmodels.Title;
 import retrofit.Call;
 import retrofit.http.GET;
 /**

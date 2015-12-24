@@ -1,4 +1,4 @@
-package jsonmodels;
+package android.com.androidcode.jsonmodels;
 /**
  * Created by jiffler on 23/12/15.
  */

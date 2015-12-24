@@ -11,7 +11,7 @@ import android.text.style.StyleSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import jsonmodels.Title;
+import android.com.androidcode.jsonmodels.Title;
 public class TitleDetailsActivity extends AppCompatActivity {
 private Title title;
     @Override
